@@ -212,7 +212,7 @@ function GetTargetName()
 end
 
 function GetDistanceToTarget()
-  return Vector3.Distance(Entity.Player.Position, Entity.Target.Position)
+  return Vector3.Distance(Svc.ClientState.LocalPlayer.Position, Svc.Targets.Target.Position)
 end
 
 ListItemRendererNodeIds = {4}
@@ -642,7 +642,7 @@ function OpenBell()
     yield("/lockon on")
     yield("/wait 0.511")
   end
-  if GetCharacterCondition(50) then
+  if GetCharacterCondition(50, true) then
     yield("/lockon off")
     while not Addons.GetAddon("RetainerList").Exists do yield("/wait 0.100") end
     yield("/wait 0.4")
