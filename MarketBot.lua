@@ -436,7 +436,6 @@ function SearchRetainers()
 end
 
 function HistoryAverage()
-  print("Inside of History")
   while Addons.GetAddon("ItemHistory").Exists==false do
     SafeCallback("ItemSearchResult", true, 0)
     yield("/wait 0.3")
@@ -446,7 +445,6 @@ function HistoryAverage()
   history_tm_running = 0
   history_list = {}
   first_history = string.gsub(GetNodeText("ItemHistory", 1, 10, 4, 4),"%d","")
-  print(first_history)
   while first_history=="" do
     yield("/wait 0.1")
     first_history = string.gsub(GetNodeText("ItemHistory", 1, 10, 4, 4),"%d","")
