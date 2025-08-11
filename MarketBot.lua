@@ -97,7 +97,6 @@ item_overrides = { --Item names with no spaces or symbols
   RamieTabard = { default = 25000 },
 }
 
-
 undercut = Config.Get("Undercut amount")
 is_dont_undercut_my_retainers = Config.Get("Don't undercut my retainers?")
 is_price_sanity_checking = Config.Get("Price sanity checking?")
@@ -573,17 +572,17 @@ end
 function Relog(relog_character)
   echo(relog_character)
   yield("/ays relog " .. relog_character)
-  while GetCharacterCondition(1) do
+  while GetCharacterCondition(1, true) do
     yield("/wait 1.01")
   end
   while GetCharacterCondition(1, false) do
     yield("/wait 1.02")
   end
-  while GetCharacterCondition(45) or GetCharacterCondition(35) do
+  while GetCharacterCondition(45, true) or GetCharacterCondition(35, true) do
     yield("/wait 1.03")
   end
   yield("/wait 0.5")
-  while GetCharacterCondition(35) do
+  while GetCharacterCondition(35, true) do
     yield("/wait 1.04")
   end
   yield("/wait 2")
@@ -1101,7 +1100,7 @@ if string.find(after_multi, "logout") then
   yield("/waitaddon SelectYesno")
   yield("/wait 0.5")
   SafeCallback("SelectYesno", true, 0)
-  while GetCharacterCondition(1) do
+  while GetCharacterCondition(1, true) do
     yield("/wait 1.1")
   end
 elseif wait_until then
