@@ -370,7 +370,7 @@ function SearchResults()
   while ready==false do
     search_hits = GetNodeText("ItemSearchResult", 1, 29)
     first_price = string.gsub(GetNodeText("ItemSearchResult", 1, 26, 4, 5),"%D","")
-    if search_wait_tick > 20 and string.find(GetNodeText("ItemSearchResult", 1, 26), "No items found.") then
+    if search_wait_tick > 20 and string.find(GetNodeText("ItemSearchResult", 1, 5), "No items found.") then
       ready = true
       debugFunc("No items found.")
     end
@@ -379,7 +379,7 @@ function SearchResults()
       debugFunc("Ready!")
     else
       search_wait_tick = search_wait_tick + 1
-      if (search_wait_tick > 50) or (string.find(GetNodeText("ItemSearchResult", 1, 26), "Please wait") and search_wait_tick > 10) then
+      if (search_wait_tick > 50) or (string.find(GetNodeText("ItemSearchResult", 1, 5), "Please wait") and search_wait_tick > 10) then
         SafeCallback("RetainerSell", true, 4)
         yield("/wait 0.1")
         if Addons.GetAddon("ItemHistory").Exists==false then
@@ -436,6 +436,7 @@ function SearchRetainers()
 end
 
 function HistoryAverage()
+  print("Inside of History")
   while Addons.GetAddon("ItemHistory").Exists==false do
     SafeCallback("ItemSearchResult", true, 0)
     yield("/wait 0.3")
@@ -445,6 +446,7 @@ function HistoryAverage()
   history_tm_running = 0
   history_list = {}
   first_history = string.gsub(GetNodeText("ItemHistory", 1, 10, 4, 4),"%d","")
+  print(first_history)
   while first_history=="" do
     yield("/wait 0.1")
     first_history = string.gsub(GetNodeText("ItemHistory", 1, 10, 4, 4),"%d","")
